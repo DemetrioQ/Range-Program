@@ -37,10 +37,13 @@ namespace Practica_4
             }
 
 
-            if (!char.IsDigit(expression[1]) && expression[1] != '-')
+            if (expression[1] == '-' && expression.Length >= 5)
             {
-                invalid = true;
-                return;
+                if (!char.IsDigit(expression[2]))
+                {
+                    invalid = true;
+                    return;
+                }
             }
 
             if (!char.IsDigit(expression[expression.Length - 2]))
@@ -49,6 +52,21 @@ namespace Practica_4
                 return;
             }
 
+            int count = 0;
+            for (int i = 0; i < expression.Length; i++)
+            {
+                if (!char.IsDigit(expression[i]) && expression[i] != '-')
+                {
+                    count++;
+                }
+
+                if (count > 3)
+                {
+                    this.invalid = true;
+                    return;
+                }
+
+            }
 
             string[] numbers = expression.Split(',');
             int min = Convert.ToInt32(numbers[0].TrimStart('[', '('));
