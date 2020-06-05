@@ -37,7 +37,7 @@ namespace Practica_4
             }
 
 
-            if (expression[1] == '-' && expression.Length >= 5)
+            if (expression[1] == '-')
             {
                 if (!char.IsDigit(expression[2]))
                 {
@@ -108,21 +108,6 @@ namespace Practica_4
             return !Contains(numbers);
         }
 
-        public bool ContainsRange(Range other)
-        {
-            if (other.Min < this.Min || other.Max > this.Max)
-            {
-                return false;
-            }
-
-            return true;
-        }
-
-        public bool DoesNotContainsRange(Range other)
-        {
-            return !ContainsRange(other);
-        }
-
         public int[] GetAllPoints()
         {
             if (this.invalid)
@@ -141,6 +126,21 @@ namespace Practica_4
             return points;
         }
 
+        public bool ContainsRange(Range other)
+        {
+            if (other.Min < this.Min || other.Max > this.Max)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public bool DoesNotContainsRange(Range other)
+        {
+            return !ContainsRange(other);
+        }
+
         public int[] EndPoints()
         {
             if (this.invalid)
@@ -149,15 +149,6 @@ namespace Practica_4
             }
             int[] endpoints = { this.Min, this.Max };
             return endpoints;
-        }
-
-        public bool OverlapsRange(Range other)
-        {
-            if (this.Min <= other.Max && other.Min <= this.Max)
-            {
-                return true;
-            }
-            return false;
         }
 
         public bool Equals(Range other)
@@ -171,6 +162,15 @@ namespace Practica_4
         public bool DoesNotEquals(Range other)
         {
             return !Equals(other);
+        }
+
+        public bool OverlapsRange(Range other)
+        {
+            if (this.Min <= other.Max && other.Min <= this.Max)
+            {
+                return true;
+            }
+            return false;
         }
 
         public void IsInvalid()
